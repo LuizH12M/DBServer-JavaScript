@@ -3,7 +3,8 @@ umaPessoa = 'John Doe';
 
 let outraPessoa = 'Mary'; // Inferencia de tipo String
 
-document.body.innerHTML = `Alô, ${umaPessoa}`;
+let hoje = new Date();
+document.body.innerHTML = `Alô, ${umaPessoa} ! Hoje é ${hoje.toDateString()}`;
 
 
 
