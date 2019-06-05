@@ -9,3 +9,9 @@ function potencia (base:number, expoente:number = 2) : number {
     }
     return resultado;
 }
+
+function buildName (firstName: string, ...restOfName: string[]) {
+    return firstName + " " restOfName.join(" ");
+}
+
+console.log(buildName('a', 'b', 'c', 'd'));
