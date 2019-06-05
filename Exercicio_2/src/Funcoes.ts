@@ -26,3 +26,4 @@ function multiplicar (fator:number) : (n:number) => number{
     return (numero => numero * fator);
 }
 console.log(multiplicar(3));
+
