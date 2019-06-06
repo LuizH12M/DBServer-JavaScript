@@ -46,3 +46,59 @@ class PessoaV3 {
 let p3 = new PessoaV3 ('John Doe', 22);
 console.log(p3);
 //console.log(p3.nome); // não pode pq o atributo é PRIVATE
+
+// TypeScript tem "tipos estruturais"
+let umaPessoa : Pessoa = new Pessoa('John Doe', 22);
+let outraPessoa : PessoaV2 = umaPessoa;
+console.log(outraPessoa);
+
+function imprime (p : {nome : string, idade : number}) : void { 
+    // o objeto deve ter pelo menos os atibutos nome e idade, mas pode ter mais atributos. E nao deve ter atributos privados
+    console.log(p.nome + ' ' + p.idade);
+}
+
+imprime(umaPessoa);
+imprime(outraPessoa);
+
+// -----------------------------------------------
+
+class Produto {
+    constructor (private _nome : string, private _preco : number) {}
+
+    get nome() : string
+    { return this._nome; }
+
+    get preco()
+    { return this._preco; }
+
+    set preco(p : number)
+    { this._preco = p; }
+
+    toString() : string {
+        return `[nome = ${this.nome}, preco = ${this.preco}]`;
+    }
+}
+
+class ProdutoPerecivel extends Produto { 
+    constructor (nome : string, preco : number, private _dataValidade : Date) { 
+        super (nome, preco);
+    }
+
+    get dataValidade() : string 
+    { return this._dataValidade.toLocaleDateString(); }
+
+    toString() : string { // Sobreescrevendo o método 'toString' da Classe Produto
+        return super.toString() + `[dataValidade = ${this._dataValidade}]`;
+    }
+}
+
+let prod1 = new Produto('prod1', 1.99);
+console.log(prod1);
+let prod2 = new ProdutoPerecivel('prod2', 100, new Date(2019, 11, 31));
+console.log(prod2);
+console.log(prod2.toString());
+
+//let prod3: Produto = {_nome = 'teste', _preco : 2.50}; não da pq os atributos da Classe Produto são Privados
+
+// prod1 = prod2; pode
+// prod2 = prod1; não pode
