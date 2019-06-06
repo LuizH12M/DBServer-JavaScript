@@ -1,5 +1,4 @@
-// LISTA DE EXERCÍCIOS: LABORATÓRIO 2 - INTRODUÇÃO AO TYPESCRIPT
-
+// --> LISTA DE EXERCÍCIOS: LABORATÓRIO 2 - INTRODUÇÃO AO TYPESCRIPT
 // Exercicio 01:
 let minimo = 3;
 let maximo = 9;
@@ -9,9 +8,7 @@ for (let i = minimo; i <= maximo; i++) {
         //console.log('Exercicio 1, versão 1: ' + i);
     }
 }
-
 // OU:
-
 function pares (inicio : number, fim : number) : number [] {
     let arrayPares : number[] = [];
     for (let i = inicio; i <= fim; i++) { 
@@ -22,9 +19,7 @@ function pares (inicio : number, fim : number) : number [] {
     return arrayPares;
 }
 //console.log('Exercicio 1, versão 2: ' + pares(2,10));
-
 // OU:
-
 function paresWhile (inicio : number, fim : number) : number [] {
     let vetor : number [] = [];
     let i = inicio;
@@ -37,11 +32,9 @@ function paresWhile (inicio : number, fim : number) : number [] {
     return vetor;
 }
 //console.log('Exercicio 1, versão 3: ' + paresWhile(2,10));
-
 // -------------------------------------------------------
 // Exercício 02:
 // RESPOSTA: O Loop será infinito, pois o JavaScript não tem precisão suficiente para realizar a soma.
-
 // -------------------------------------------------------
 // Exercício 03:
 function min (x : number, y : number) : number {
@@ -51,7 +44,18 @@ function min (x : number, y : number) : number {
         return x;
 }
 console.log(min(2,9));
+// -------------------------------------------------------
+// Exercício 04:
 
+// -------------------------------------------------------
+// Exercício 05:
+function toMaiusculaPrimeira(palavra: string) : string {
+    return palavra.charAt(0).toUpperCase() + palavra.substring(1, palavra.length);
+    // OU:
+    // return palavra.replace(palavra.charAt(0), palavra.charAt(0).toLocaleUpperCase()); 
+    // REPLACE: (o que sera trocado, o que tu quer trocar)
+}
+console.log(toMaiusculaPrimeira('luiz'));
 // -------------------------------------------------------
 // Exercício 06:
 function getMax (array: number[]) : number {
@@ -68,7 +72,6 @@ function getMax (array: number[]) : number {
 //console.log(getMax([]));
 //console.log(getMax([null]));
 //console.log(getMax([undefined]));
-
 // ---------------------------------------------------------
 // Exercício 07:
 function frequencia (array : number[]) : Map<number, number> { 
@@ -87,3 +90,9 @@ function frequencia (array : number[]) : Map<number, number> {
 //console.log(frequencia([]));
 //console.log(3 || 0); // irá retornar 3, pois ele eh True
 //console.log (undefined || 0); // os dois são False, mas irá retornar '0' pq é o 2° operador
+// OU:
+function frequenciaV2 (array : number[]) : Map<number,number> {
+    return array.reduce((contagem, valor) => contagem.set(valor, (contagem.get(valor) || 0) + 1), new Map<number, number>()); 
+    // REDUCE: (objeto_acumulador, elemento_atual)
+}
+//console.log(frequenciaV2([1,2,3,421,31]));
