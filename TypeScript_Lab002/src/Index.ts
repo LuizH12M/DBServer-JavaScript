@@ -43,10 +43,25 @@ function min (x : number, y : number) : number {
     else
         return x;
 }
-console.log(min(2,9));
+//console.log(min(2,9));
 // -------------------------------------------------------
 // Exercício 04:
+function powIterativo (x : number, y : number) : number {
+    if (y === 0) 
+        return 1;
+    let resultado = x;
+    for (let i = y; i > 1; i--)
+        resultado = resultado * x;
+    return resultado;    
+}
+//console.log(powIterativo(4,5));
 
+function powRecursivo (x : number, y : number) : number {
+    if (y === 0) 
+        return 1;
+    return x * powRecursivo(x, y - 1);
+}
+//console.log('Exercicio 4, Recursivo: ' + powRecursivo(4,5));
 // -------------------------------------------------------
 // Exercício 05:
 function toMaiusculaPrimeira(palavra: string) : string {
@@ -55,7 +70,7 @@ function toMaiusculaPrimeira(palavra: string) : string {
     // return palavra.replace(palavra.charAt(0), palavra.charAt(0).toLocaleUpperCase()); 
     // REPLACE: (o que sera trocado, o que tu quer trocar)
 }
-console.log(toMaiusculaPrimeira('luiz'));
+//console.log(toMaiusculaPrimeira('luiz'));
 // -------------------------------------------------------
 // Exercício 06:
 function getMax (array: number[]) : number {
