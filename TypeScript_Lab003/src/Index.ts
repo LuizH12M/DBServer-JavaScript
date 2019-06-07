@@ -46,36 +46,66 @@ let c2 = new CirculoV2 (1,1,3.5);
 console.log(`Exercício 1, versão 2: ${c2}`);
 console.log(c2.areaCirculoV2());
 console.log(c2.comprimentoCirculoV2());
+// OU:
+abstract class FiguraBidimensional {
+    constructor (private centroX : number, private centroY : number) {}
+
+    get x() : number 
+    { return this.centroX; }
+
+    get y() : number
+    { return this.centroY; }
+
+
+    abstract area() : number;
+}
+
+class CirculoV3 extends FiguraBidimensional {
+    constructor (centroX : number, centroY : number, private raio : number) 
+    { super (centroX, centroY); }
+    
+    area() 
+    { return Math.PI * Math.pow(this.raio, 2)};
+
+    get raio_ () 
+    { return this.raio; }
+}
+let fig1 : FiguraBidimensional = new CirculoV3(1,1,3);
+console.log(fig1);
+console.log(fig1.area());
+console.log(fig1.x);
+console.log((<CirculoV3>fig1).raio_);
 // --------------------------------------------------------------------------
-// Exercício 2:
+//Exercício 2
 class Moeda {
-    constructor (private valor : number, private nome : string) {}
+    constructor(private _valor: number, private _nome: string) {}
 
-    getValor() : number
-    { return this.valor; }
-    
-    getNome() : string
-    { return this.nome; }
-
-    moeda(v : number, n : string)
-    { return `O nome da moeda é: ${this.getNome()} e tem o valor: ${this.getValor()}`}
-}
-
-class Cofrinho extends Moeda {
-    constructor (valor : number, nome : string) {
-        super (valor, nome);
+    get valor(): number {
+        return this._valor;
     }
 
-    /*
-    cofrinho() {
-        let moedas : number [] = [];
-        for(let i = 0; i)
+    get nome(): string {
+        return this._nome;
     }
-    */
-   
-    
-
-
-
 }
+
+class Cofrinho {
+    private moedas: Moeda[] = [];
+
+    adicionar(m: Moeda): void {
+        this.moedas.push(m);
+    }
+
+    calcularTotal(): number {
+        const somador: (x: number, y: Moeda) => number = (soma,moeda) => soma + moeda.valor;
+        return this.moedas.reduce(somador, 0);
+    }
+}
+let moeda1: Moeda = new Moeda(50, "50 centavos");
+let moeda2: Moeda = new Moeda(25, "25 centavos");
+let cofre: Cofrinho = new Cofrinho();
+cofre.adicionar(moeda1);
+cofre.adicionar(moeda2);
+console.log(cofre.calcularTotal());
+
 
