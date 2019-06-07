@@ -13,6 +13,9 @@ function vaiDarErro() {
 try {
     vaiDarErro();
 } catch (erro) {
-    console.log(erro.name);
-    console.log(erro.mensage);
+    if (erro instanceof ValidationError) {
+
+    } else {
+        throw erro;
+    }
 }
