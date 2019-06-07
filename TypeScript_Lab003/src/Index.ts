@@ -98,6 +98,7 @@ class Cofrinho {
 
     calcularTotal(): number {
         const somador: (x: number, y: Moeda) => number = (soma,moeda) => soma + moeda.valor;
+        //                       tipo                                   função
         return this.moedas.reduce(somador, 0);
     }
 }
