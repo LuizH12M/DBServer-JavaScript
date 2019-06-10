@@ -130,9 +130,17 @@ class Cofrinho {
         return this.moedas[a].nome + ' ' + this.moedas[a].valor;
     }
 
-    //frequenciaMoedas() : Map<number,string> {
-        
-    //}
+    freqMoedas(): Map<number, number>{
+        let mapa = new Map<number,number>();
+        mapa.set(1, 0);
+        mapa.set(5, 0);
+        mapa.set(10, 0);
+        mapa.set(25, 0);
+        mapa.set(50, 0);
+        mapa.set(100, 0);
+        this.moedas.map((m) => mapa.set(m.valor, (mapa.get(m.valor)||0)+1));
+        return mapa;
+    }
 
 
 }
@@ -146,5 +154,7 @@ cofre.adicionar(moeda3);
 //console.log(cofre.calcularTotal());
 console.log('Menor valor: ' + cofre.menorValor());
 console.log('Menor moeda: ' + cofre.menorMoeda());
+console.log(cofre.freqMoedas());
+// ----------------------------------------------------------
 
 
