@@ -1,3 +1,5 @@
+import { stringify } from "querystring";
+
 // LABORATÓRIO 3: LISTA DE EXERCÍCIOS:
 // Exercício 01:
 class Circulo {
@@ -21,7 +23,7 @@ class Circulo {
 }
 
 let c1 = new Circulo (1,1,2);
-console.log(c1.areaCirculo());
+//console.log(c1.areaCirculo());
 // OU:
 class CirculoV2 {
     constructor (private x:number, private y:number, private raio:number) {}
@@ -43,9 +45,9 @@ class CirculoV2 {
 }
 
 let c2 = new CirculoV2 (1,1,3.5);
-console.log(`Exercício 1, versão 2: ${c2}`);
-console.log(c2.areaCirculoV2());
-console.log(c2.comprimentoCirculoV2());
+//console.log(`Exercício 1, versão 2: ${c2}`);
+//console.log(c2.areaCirculoV2());
+//console.log(c2.comprimentoCirculoV2());
 // OU:
 abstract class FiguraBidimensional {
     constructor (private centroX : number, private centroY : number) {}
@@ -71,10 +73,10 @@ class CirculoV3 extends FiguraBidimensional {
     { return this.raio; }
 }
 let fig1 : FiguraBidimensional = new CirculoV3(1,1,3);
-console.log(fig1);
-console.log(fig1.area());
-console.log(fig1.x);
-console.log((<CirculoV3>fig1).raio_);
+//console.log(fig1);
+//console.log(fig1.area());
+//console.log(fig1.x);
+//console.log((<CirculoV3>fig1).raio_);
 // --------------------------------------------------------------------------
 //Exercício 2
 class Moeda {
@@ -152,9 +154,84 @@ cofre.adicionar(moeda1);
 cofre.adicionar(moeda2);
 cofre.adicionar(moeda3);
 //console.log(cofre.calcularTotal());
-console.log('Menor valor: ' + cofre.menorValor());
-console.log('Menor moeda: ' + cofre.menorMoeda());
-console.log(cofre.freqMoedas());
+//console.log('Menor valor: ' + cofre.menorValor());
+//console.log('Menor moeda: ' + cofre.menorMoeda());
+//console.log(cofre.freqMoedas());
 // ----------------------------------------------------------
+abstract class Cliente {
+    constructor (private nome:string) {}
 
+    getNome():string
+    { return this.nome; }
+
+    abstract getMensalidade():number;
+}
+
+class ClienteFisico extends Cliente {
+    constructor (nome:string, private idade:number, private salario:number) 
+    { super (nome); }
+
+    getIdade() : number
+    { return this.idade; }
+
+    setIdade(i:number) 
+    { this.idade = i; }
+
+    getSalario() : number 
+    { return this.salario; }
+
+    setSalario(s:number) 
+    { this.salario = s; }
+
+    getMensalidade() : number { 
+        let a : number = 0;
+        if(this.getIdade() < 60) 
+            return this.salario * 0.1;
+        else
+            return this.salario * 0.15;
+    }
+}
+
+class ClienteJuridico extends Cliente {
+    constructor (nome:string, private mensalidade:number) 
+    { super (nome); }
+
+    setMensalidade(m:number)
+    { this.mensalidade = m; }
+
+    getMensalidade() 
+    { return this.mensalidade; }
+}
+
+
+
+class CadastroClientes {
+    private colecaoClientes : Cliente[] = [];
+
+    adicionar(c : Cliente) : void 
+    { this.colecaoClientes.push(c); }
+
+    listagemClientes () : Map<string, number> {
+        let mapa = new Map <string, number>();
+        //this.colecaoClientes.map((m) => mapa.set(m.getNome, (mapa.getm.getMensalidade) || 0) + 1));
+        this.colecaoClientes.map((m) => mapa.set(m.getNome(), (m.getMensalidade())));
+        return mapa;
+    }
+}
+
+
+let cliente1 : ClienteFisico = new ClienteFisico("Luiz", 19, 1100);
+// console.log(cliente1);
+// console.log(cliente1.getMensalidade());
+let cliente2 : ClienteFisico = new ClienteFisico("Camillinha", 65, 4500);
+// console.log(cliente2);
+// console.log(cliente2.getIdade());
+// console.log(cliente2.setIdade(35));
+// console.log(cliente2.getMensalidade());
+// console.log(cliente2);
+let cadastrar : CadastroClientes = new CadastroClientes();
+cadastrar.adicionar(cliente1);
+cadastrar.adicionar(cliente2);
+//console.log(cadastrar);
+console.log(cadastrar.listagemClientes());
 
