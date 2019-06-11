@@ -9,10 +9,21 @@ export function salvarCofre (cofre : Cofrinho, nomeArq : string) : void {
     });
 }
 
-export function lerCofreAssync (nomeArq : string) : void {
-    fs.readFile(nomeArq, 'utf-8', (erro, dados) => {
-        if (erro !== null) 
-            throw erro;
-        const obj = JSON.parse(dados);
-    })
+// export function lerCofreAssync (nomeArq : string) : void {
+//     fs.readFile(nomeArq, 'utf-8', (erro, dados) => {
+//         if (erro !== null) 
+//             throw erro;
+//         const obj = JSON.parse(dados);
+//     })
+// }
+
+export function lerCofre(nomeArq : string,
+    callback : (erro: Error|null, dados ?: Cofrinho) => void) { // '?:' significa opcional
+        fs.readFile(nomeArq, 'utf-8', (erro, dados) => {
+            if (erro) {
+                callback(erro);
+            }
+            const obj = JSON.parse(dados);
+            callback(null, obj);
+        });
 }
