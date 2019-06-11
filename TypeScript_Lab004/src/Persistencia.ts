@@ -1,29 +1,37 @@
+import { Cofrinho, Moeda } from './entidades';
 import * as fs from 'fs';
-import { Cofrinho } from './Entidades';
 
-export function salvarCofre (cofre : Cofrinho, nomeArq : string) : void {
-    const json = JSON.stringify(cofre);
-    fs.writeFile(nomeArq, json, erro => {
-        if (erro) // if (erro !== null) 
-            throw erro;
-    });
+export async function salvarCofrinho(cofre: Cofrinho, nomeArquivo: string) {
+    try {
+        let conteudo = JSON.stringify(cofre);
+        await fs.writeFileSync(nomeArquivo, conteudo); 
+    } catch (erro) {
+
+    }
 }
 
-// export function lerCofreAssync (nomeArq : string) : void {
-//     fs.readFile(nomeArq, 'utf-8', (erro, dados) => {
-//         if (erro !== null) 
-//             throw erro;
-//         const obj = JSON.parse(dados);
-//     })
+// export function lerCofrinho(nomeArquivo: string): Promise<Cofrinho> {
+//     return fs.promises.readFile(nomeArquivo, 'utf-8')
+//     .then(dados => JSON.parse(dados))
+//     .then(obj => {
+//         const cofre = new Cofrinho();
+//         for (let i=0; i<obj.moedas.lenght; i++) {
+//             cofre.adicionar(new Moeda(obj.moedas[i].valor, obj.moedas[i].nome));
+//         }
+//         return cofre;
+//     });
 // }
 
-export function lerCofre(nomeArq : string,
-    callback : (erro: Error|null, dados ?: Cofrinho) => void) { // '?:' significa opcional
-        fs.readFile(nomeArq, 'utf-8', (erro, dados) => {
-            if (erro) {
-                callback(erro);
-            }
-            const obj = JSON.parse(dados);
-            callback(null, obj);
-        });
+export async function lerCofrinho(nomeArquivo: string): Promise<Cofrinho> {
+    const dados = await promises.readFile(nomeArquivo, 'utf-8');
+    try {
+        const obj = JSON.parse(dados);
+        const cofre = new Cofrinho();
+        for (let i=0; i<obj.moedas.lenght; i++) {
+            cofre.adicionar(new Moeda(obj.moedas[i]._valor, obj.moedas[i]._nome));
+        } 
+        return cofre;
+    } catch (erro) {
+        throw erro;
+    }
 }
