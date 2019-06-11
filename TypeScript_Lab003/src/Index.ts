@@ -158,6 +158,7 @@ cofre.adicionar(moeda3);
 //console.log('Menor moeda: ' + cofre.menorMoeda());
 //console.log(cofre.freqMoedas());
 // ----------------------------------------------------------
+// Exercício 4:
 abstract class Cliente {
     constructor (private nome:string) {}
 
