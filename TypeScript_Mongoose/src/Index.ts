@@ -1,4 +1,4 @@
-import {connect, Schema, model} from 'mongoose';
+import {connect, Schema, model} from 'Mongoose';
 
 async function Main(){
     try {
