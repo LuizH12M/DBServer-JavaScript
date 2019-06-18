@@ -1,5 +1,4 @@
 import { Livro } from "../entidades/livro";
-import {AutorModel} from './autorModel';
 import { Document, model, Schema, SchemaTypes, Model } from "mongoose";
 
 interface LivroDocument extends Livro, Document {}
